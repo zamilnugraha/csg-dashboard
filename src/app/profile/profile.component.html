@@ -1,0 +1,143 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Profile Store</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="doPostData()" #addForm="ngForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Code Store</label>
+                                    <input type="text" class="form-control" placeholder="Code Store (disabled)" disabled
+                                        name="kodeStore" [(ngModel)]="field.kodeStore" #kodeStore="ngModel">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputPassword4">Item Transaction</label>
+                                    <input type="text" class="form-control" placeholder="Item Transaction (disabled)"
+                                        disabled name="itemPerTransaction" [(ngModel)]="field.itemPerTransaction"
+                                        #itemPerTransaction="ngModel">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputPassword4">Eat In</label>
+                                    <input type="text" class="form-control" placeholder="Eat In (disabled)" disabled
+                                        name="eatIn" [(ngModel)]="field.eatIn" #eatIn="ngModel">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">Store Name</label>
+                                <input type="text" class="form-control" id="inputAddress" placeholder="KFC MT Haryono"
+                                    name="nameStore" [(ngModel)]="field.nameStore" #nameStore="ngModel">
+                                <div *ngIf="nameStore.invalid && (nameStore.dirty || nameStore.touched)"
+                                    class="has-danger">
+                                    <div class="form-control-feedback" *ngIf="nameStore.errors.required">
+                                        Store Name is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">Location Store</label>
+                                <input type="text" class="form-control" id="inputAddress"
+                                    placeholder="MT Haryono Pancoran" name="locationStore"
+                                    [(ngModel)]="field.locationStore" #locationStore="ngModel">
+                                <div *ngIf="locationStore.invalid && (locationStore.dirty || locationStore.touched)"
+                                    class="has-danger">
+                                    <div class="form-control-feedback" *ngIf="locationStore.errors.required">
+                                        Location Store is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2 ml-auto">
+                                    <label for="inputZip">Seating Capcity</label>
+                                    <input type="text" class="form-control" type="text" name="seatingCapacity"
+                                        [(ngModel)]="field.seatingCapacity" #seatingCapacity="ngModel"
+                                        (keypress)="numberOnly($event)">
+                                    <div *ngIf="seatingCapacity.invalid && (seatingCapacity.dirty || seatingCapacity.touched)"
+                                        class="has-danger">
+                                        <div class="form-control-feedback" *ngIf="seatingCapacity.errors.required">
+                                            Seating Capacity is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2 ml-auto">
+                                    <label for="inputZip">Number Of Floors</label>
+                                    <input type="text" class="form-control" type="text" name="numberOfFloors"
+                                        [(ngModel)]="field.numberOfFloors" #numberOfFloors="ngModel"
+                                        (keypress)="numberOnly($event)">
+                                    <div *ngIf="numberOfFloors.invalid && (numberOfFloors.dirty || numberOfFloors.touched)"
+                                        class="has-danger">
+                                        <div class="form-control-feedback" *ngIf="numberOfFloors.errors.required">
+                                            Number Of Floors is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputState">Type Store</label>
+                                    <select id="inputState" class="form-control" name="storeType"
+                                        [(ngModel)]="field.storeType" #storeType="ngModel">
+                                        <option selected>Choose Store Type</option>
+                                        <option value="Mother Store">Mother Store</option>
+                                        <option value="Home Delivery">Home Delivery</option>
+                                        <option value="Coffee Shop">Coffee Shop</option>
+                                        <option value="Drive Thrue">Drive Thrue</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2 ml-auto">
+                                    <label for="inputZip">Total Crew</label>
+                                    <input type="text" class="form-control" type="text" name="totalCrew"
+                                        [(ngModel)]="field.totalCrew" #totalCrew="ngModel"
+                                        (keypress)="numberOnly($event)">
+                                    <div *ngIf="totalCrew.invalid && (totalCrew.dirty || totalCrew.touched)"
+                                        class="has-danger">
+                                        <div class="form-control-feedback" *ngIf="totalCrew.errors.required">
+                                            Total Crew is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2 ml-auto">
+                                    <label for="inputZip">Minimum Crew</label>
+                                    <input type="text" class="form-control" type="text" name="minimumCrew"
+                                        [(ngModel)]="field.minimumCrew" #minimumCrew="ngModel"
+                                        (keypress)="numberOnly($event)">
+                                    <div *ngIf="minimumCrew.invalid && (minimumCrew.dirty || minimumCrew.touched)"
+                                        class="has-danger">
+                                        <div class="form-control-feedback" *ngIf="minimumCrew.errors.required">
+                                            Minimum Crew is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-success pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/logo.png" />
+                        </a>
+                    </div>
+                    <div class="card-body" *ngFor="let data of dataProfile">
+                        <h6 class="card-category text-gray">{{data.namaStore}}</h6>
+                        <h6 class="card1">Code Store : {{data.kodeStore}}</h6>
+                        <h6 class="card1">Store Type : {{data.storeType}}</h6>
+                        <h6 class="card1">Location : {{data.location}}</h6>
+                        <h6 class="card1">Item Transaction : {{data.itemPerTransaction}}</h6>
+                        <h6 class="card1">Number Of Floors : {{data.numberOfFloors}}</h6>
+                        <h6 class="card1">Seating Capacity : {{data.seatingCapacity}}</h6>
+                        <h6 class="card1">Eat In : {{data.eatIn}}</h6>
+                        <h6 class="card1">Total Crew : {{data.totalCrew}}</h6>
+                        <h6 class="card1">Minimum Crew : {{data.minimumCrew}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title">Cleaning Task</h4>
+                        <p class="card-category">{{currentDate | date:'EEEE , dd-MMMM-yyyy'}}</p>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sunday</td>
+                                    <td  *ngFor="let data of cleanTask">
+                                        {{data.cleanLocation}} : {{data.cleanType}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Monday</td>
+                                </tr>
+                                <tr>
+                                    <td>Tuesday</td>
+                                </tr>
+                                <tr>
+                                    <td>Wednesday</td>
+                                </tr>
+                                <tr>
+                                    <td>Thursday</td>
+                                </tr>
+                                <tr>
+                                    <td>Friday</td>
+                                </tr>
+                                <tr>
+                                    <td>Saturday</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

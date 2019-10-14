@@ -1,0 +1,125 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Add Crew</h4>
+            <p class="card-category">Complete your profile</p>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="doPostData()" #addForm="ngForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Kode Store" type="text" name="kodeStore" [(ngModel)]="field.kodeStore"
+                      #kodeStore="ngModel" (keypress)="numberOnly($event)">
+                    <div *ngIf="kodeStore.invalid && (kodeStore.dirty || kodeStore.touched)" class="has-danger">
+                      <div class="form-control-feedback" *ngIf="kodeStore.errors.required">
+                        Kode Store is required.
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="NIK" type="text" name="nik" [(ngModel)]="field.nik" #nik="ngModel"
+                      (keypress)="numberOnly($event)" [readonly]="!isReadOnly">
+                    <div *ngIf="nik.invalid && (nik.dirty || nik.touched)" class="has-danger">
+                      <div class="form-control-feedback" *ngIf="nik.errors.required">
+                        NIK is required.
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Name" type="text" name="name" [(ngModel)]="field.name" #name="ngModel">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="has-danger">
+                      <div class="form-control-feedback" *ngIf="name.errors.required">
+                        Name is required.
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Position Job" type="text" name="position" [(ngModel)]="field.position"
+                      #position="ngModel">
+                    <div *ngIf="position.invalid && (position.dirty || position.touched)" class="has-danger">
+                      <div class="form-control-feedback" *ngIf="position.errors.required">
+                        Position is required.
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Status" type="text" name="status" [(ngModel)]="field.status"
+                      #status="ngModel">
+                    <div *ngIf="status.invalid && (status.dirty || status.touched)" class="has-danger">
+                      <div class="form-control-feedback" *ngIf="status.errors.required">
+                        Status is required.
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" *ngIf="displaySave"
+                class="btn btn-success pull-right">Save</button>
+              <button mat-raised-button type="submit" *ngIf="!displaySave"
+                class="btn btn-info pull-right">update</button>
+              <button mat-raised-button type="button" *ngIf="!displaySave" (click)="doCancel()"
+                class="btn btn-danger pull-right">Cancel</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Data Crew</h4>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead class="text-danger">
+                <th>Kode Store</th>
+                <th>Nik</th>
+                <th>Name Crew</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th class="td-actions">Action</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let crew of crews">
+                  <td>{{crew.kodeStore}}</td>
+                  <td>{{crew.nik}}</td>
+                  <td>{{crew.nama}}</td>
+                  <td>{{crew.jabatan}}</td>
+                  <td>{{crew.status}}</td>
+                  <td class="td-actions">
+                    <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                      class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="doGetDataByID(crew.nik)">
+                      <i class="material-icons">edit</i>
+                    </button>
+                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                      class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="doDelete(crew.nik)">
+                      <i class="material-icons">close</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
