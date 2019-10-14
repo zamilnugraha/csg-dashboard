@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-success">
                         <h4 class="card-title">Add Crew Schedul</h4>
                         <p class="card-category">Complete your profile</p>
                     </div>
@@ -33,27 +33,31 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Start Date ex : 8.00" type="text" name="startTime"
+                                        <input matInput placeholder="Start Date ex : 8:00" type="text" name="startTime"
                                             autocomplete="off" [(ngModel)]="field.startTime" #startTime="ngModel"
                                             (keypress)="numberOnly($event)" required>
-                                        <div *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)"
-                                            class="has-danger">
-                                            <div class="form-control-feedback" *ngIf="startTime.errors.required">
-                                                Start TIme is required.
-                                            </div>
+                                        <div class="alert alert-danger"
+                                            *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)">
+                                            <button mat-button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                            <span *ngIf="startTime.errors.required">Start Time is required.</span>
                                         </div>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="End Date ex : 17.00" type="text" name="endTime"
+                                        <input matInput placeholder="End Date ex : 17:00" type="text" name="endTime"
                                             autocomplete="off" [(ngModel)]="field.endTime" #endTime="ngModel"
                                             (keypress)="numberOnly($event)" required>
-                                        <div *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)"
-                                            class="has-danger">
-                                            <div class="form-control-feedback" *ngIf="endTime.errors.required">
-                                                End Time is required.
-                                            </div>
+                                        <div class="alert alert-danger"
+                                            *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)">
+                                            <button mat-button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                            <span *ngIf="startTime.errors.required">End Time is required.</span>
                                         </div>
                                     </mat-form-field>
                                 </div>
@@ -65,12 +69,6 @@
                                             [owlDateTime]="workDate" [(ngModel)]="field.workDate" #workDate="ngModel"
                                             autocomplete="off" placeholder="Select Date Crew Schedul" required>
                                         <owl-date-time [pickerMode]="'dialog'" #workDate></owl-date-time>
-                                        <div *ngIf="workDate.invalid && (workDate.dirty || workDate.touched)"
-                                            class="has-danger">
-                                            <div class="form-control-feedback" *ngIf="workDate.errors.required">
-                                                Start Date is required.
-                                            </div>
-                                        </div>
                                     </mat-form-field>
                                 </div>
                             </div>

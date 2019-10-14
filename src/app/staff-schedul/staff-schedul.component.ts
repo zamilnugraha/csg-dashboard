@@ -49,7 +49,7 @@ export class StaffSchedulComponent implements OnInit {
 
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 58 && charCode != 79 && charCode != 70 && charCode != 67 && charCode != 84) {
       return false;
     }
     return true;
@@ -59,7 +59,7 @@ export class StaffSchedulComponent implements OnInit {
     let self = this;
     let url = "";
     self.paramID = self.field.id;
-    
+
     if (self.paramID === undefined) {
       url = "http://localhost:8083/csg/staffSave";
     } else {
@@ -73,7 +73,7 @@ export class StaffSchedulComponent implements OnInit {
     } else if (!self.field.endTime) {
       self.alertDialogPost("End Time");
     } else if (!self.field.workDate) {
-      self.alertDialogPost("Work Date");  
+      self.alertDialogPost("Work Date");
     } else {
       if (this.paramID === undefined) {
         Swal.fire({
@@ -89,7 +89,7 @@ export class StaffSchedulComponent implements OnInit {
             location.reload();
           }
         });
-      } else{
+      } else {
         Swal.fire({
           title: 'Information',
           text: 'Are you sure to update this data?',
