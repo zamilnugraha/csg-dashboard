@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Add Staff Schedul</h4>
+                        <h4 class="card-title">Add Crew Schedul</h4>
                         <p class="card-category">Complete your profile</p>
                     </div>
                     <div class="card-body">
@@ -18,26 +18,41 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="inputState">Nama Crew</label>
+                                        <mat-select id="inputState" class="form-control" name="nik"
+                                            [(ngModel)]="field.nik" #nik="ngModel">
+                                            <mat-option *ngFor="let obj of listCrew" [value]="obj.nik">
+                                                {{obj.nama}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Posisi" type="text" name="posisi"
-                                            [(ngModel)]="field.posisi" #posisi="ngModel">
-                                        <div *ngIf="posisi.invalid && (posisi.dirty || posisi.touched)"
+                                        <input matInput placeholder="Start Date ex : 8.00" type="text" name="startTime"
+                                            autocomplete="off" [(ngModel)]="field.startTime" #startTime="ngModel"
+                                            (keypress)="numberOnly($event)" required>
+                                        <div *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)"
                                             class="has-danger">
-                                            <div class="form-control-feedback" *ngIf="posisi.errors.required">
-                                                Posisi is required.
+                                            <div class="form-control-feedback" *ngIf="startTime.errors.required">
+                                                Start TIme is required.
                                             </div>
                                         </div>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Clean Location" type="text" name="cleanLocation"
-                                            [(ngModel)]="field.cleanLocation" #cleanLocation="ngModel">
-                                        <div *ngIf="cleanLocation.invalid && (cleanLocation.dirty || cleanLocation.touched)"
+                                        <input matInput placeholder="End Date ex : 17.00" type="text" name="endTime"
+                                            autocomplete="off" [(ngModel)]="field.endTime" #endTime="ngModel"
+                                            (keypress)="numberOnly($event)" required>
+                                        <div *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)"
                                             class="has-danger">
-                                            <div class="form-control-feedback" *ngIf="cleanLocation.errors.required">
-                                                Clean Location is required.
+                                            <div class="form-control-feedback" *ngIf="endTime.errors.required">
+                                                End Time is required.
                                             </div>
                                         </div>
                                     </mat-form-field>
@@ -46,12 +61,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Clean Type" type="text" name="cleanType"
-                                            [(ngModel)]="field.cleanType" #cleanType="ngModel">
-                                        <div *ngIf="cleanType.invalid && (cleanType.dirty || cleanType.touched)"
+                                        <input matInput type="text" name="workDate" [owlDateTimeTrigger]="workDate"
+                                            [owlDateTime]="workDate" [(ngModel)]="field.workDate" #workDate="ngModel"
+                                            autocomplete="off" placeholder="Select Date Crew Schedul" required>
+                                        <owl-date-time [pickerMode]="'dialog'" #workDate></owl-date-time>
+                                        <div *ngIf="workDate.invalid && (workDate.dirty || workDate.touched)"
                                             class="has-danger">
-                                            <div class="form-control-feedback" *ngIf="cleanType.errors.required">
-                                                Clean Type is required.
+                                            <div class="form-control-feedback" *ngIf="workDate.errors.required">
+                                                Start Date is required.
                                             </div>
                                         </div>
                                     </mat-form-field>
@@ -72,32 +89,35 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Data Clean</h4>
+                        <h4 class="card-title">Data Crew Schedul</h4>
+                        <button mat-raised-button type="button" class="btn btn-primary pull-right">Show Schedul</button>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
                             <thead class="text-danger">
-                                <th>Posisi</th>
-                                <th>Clean Location</th>
-                                <th>Clean Type</th>
+                                <th>Crew ID</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Date Work</th>
                                 <th class="td-actions">Action</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cleans of clean">
-                                    <td>{{cleans.posisi}}</td>
-                                    <td>{{cleans.cleaningLocation}}</td>
-                                    <td>{{cleans.cleaningType}}</td>
+                                <tr *ngFor="let data of listStaffSchedul">
+                                    <td>{{data.crewId}}</td>
+                                    <td>{{data.startDate}}</td>
+                                    <td>{{data.endDate}}</td>
+                                    <td>{{data.dateWork | date:'EEEE , dd-MMMM-yyyy'}}</td>
                                     <td class="td-actions">
                                         <button mat-raised-button type="button" matTooltip="Edit Task"
                                             [matTooltipPosition]="'above'"
                                             class="btn btn-primary btn-link btn-sm btn-just-icon"
-                                            (click)="doGetDataByID(cleans.kodeClean)">
+                                            (click)="doGetDataByID(data.id)">
                                             <i class="material-icons">edit</i>
                                         </button>
                                         <button mat-raised-button type="button" matTooltip="Remove"
                                             [matTooltipPosition]="'above'"
                                             class="btn btn-danger btn-link btn-sm btn-just-icon"
-                                            (click)="doDelete(cleans.kodeClean)">
+                                            (click)="doDelete(data.id)">
                                             <i class="material-icons">close</i>
                                         </button>
                                     </td>

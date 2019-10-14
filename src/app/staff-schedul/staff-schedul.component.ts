@@ -16,23 +16,43 @@ export class StaffSchedulComponent implements OnInit {
     private http: Http,
   ) { }
 
-  clean: Observable<any[]>;
+  listStaffSchedul: Observable<any[]>;
   field: any = {};
   urlNow: string;
   paramID: string;
   displaySave: boolean;
   isReadOnly: boolean;
   edited: boolean;
+  listCrew: any = [];
 
   ngOnInit() {
-    var url = "http://localhost:8083/csg/cleanAll";
+    var url = "http://localhost:8083/csg/staffAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
-      this.clean = datas;
+      this.listStaffSchedul = datas;
     });
     this.displaySave = true;
     this.isReadOnly = true
     this.edited = false;
+    this.doGetListClean();
+  }
+
+  doGetListClean() {
+    Helpers.setLoading(true);
+    var url = "http://localhost:8083/csg/crewAll";
+    this.http.get(url).subscribe(res => {
+      var datas = res.json().datas;
+      this.listCrew = datas;
+      Helpers.setLoading(false);
+    });
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+      return false;
+    }
+    return true;
   }
 
   doPostData() {
@@ -41,17 +61,19 @@ export class StaffSchedulComponent implements OnInit {
     self.paramID = self.field.id;
     
     if (self.paramID === undefined) {
-      url = "http://localhost:8083/csg/cleanSave";
+      url = "http://localhost:8083/csg/staffSave";
     } else {
-      url = "http://localhost:8083/csg/cleanUpdate/" + self.paramID;
+      url = "http://localhost:8083/csg/staffUpdate/" + self.paramID;
     }
 
-    if (!self.field.posisi) {
-      self.alertDialogPost("Position");
-    } else if (!self.field.cleanLocation) {
-      self.alertDialogPost("Clean Location");
-    } else if (!self.field.cleanType) {
-      self.alertDialogPost("Clean Type");
+    if (!self.field.nik) {
+      self.alertDialogPost("Crew Name");
+    } else if (!self.field.startTime) {
+      self.alertDialogPost("Start Time");
+    } else if (!self.field.endTime) {
+      self.alertDialogPost("End Time");
+    } else if (!self.field.workDate) {
+      self.alertDialogPost("Work Date");  
     } else {
       if (this.paramID === undefined) {
         Swal.fire({
@@ -87,10 +109,11 @@ export class StaffSchedulComponent implements OnInit {
 
   doPostDataProcess(url) {
     var dataForm = {
-      "kodeClean": this.field.id,
-      "posisi": this.field.posisi,
-      "cleaningLocation": this.field.cleanLocation,
-      "cleaningType": this.field.cleanType
+      "id": this.field.id,
+      "crewId": this.field.nik,
+      "startDate": this.field.startTime,
+      "endDate": this.field.endTime,
+      "dateWork": this.field.workDate
     }
 
     this.http.post(url, dataForm).map(res =>
@@ -101,7 +124,7 @@ export class StaffSchedulComponent implements OnInit {
         this.alertDialogResult(result.message);
       } else {
         Helpers.setLoading(false);
-        this.router.navigate(['/clean']);
+        this.router.navigate(['/staff-schedul']);
         location.reload();
       }
 
@@ -121,17 +144,18 @@ export class StaffSchedulComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/cleanById/" + id;
+    var urlGetByID = "http://localhost:8083/csg/staffById/" + id;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
       if (res.json().status == 100) {
         self.field = datas;
 
-        self.field.id = datas.kodeClean;
-        self.field.posisi = datas.posisi;
-        self.field.cleanLocation = datas.cleaningLocation;
-        self.field.cleanType = datas.cleaningType;
+        self.field.id = datas.id;
+        self.field.nik = datas.crewId;
+        self.field.startTime = datas.startDate;
+        self.field.endTime = datas.endDate;
+        self.field.workDate = new Date(datas.dateWork);
 
       } else if (res.json().status == 0) {
         Swal.fire({
@@ -151,7 +175,7 @@ export class StaffSchedulComponent implements OnInit {
 
   doDelete(id) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/cleanDelete/" + id;
+    var urldelete = "http://localhost:8083/csg/staffDelete/" + id;
     Swal.fire({
       title: 'Information',
       text: "Are you sure to delete this crew?",
