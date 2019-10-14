@@ -1,75 +1,62 @@
-import { Observable } from 'rxjs';
-import { Helpers } from './../helpers';
+import { Helpers } from '../helpers';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-clean-schedul',
-  templateUrl: './clean-schedul.component.html',
-  styleUrls: ['./clean-schedul.component.css']
+  selector: 'app-staff-schedul',
+  templateUrl: './staff-schedul.component.html',
+  styleUrls: ['./staff-schedul.component.css']
 })
-
-export class CleanSchedulComponent implements OnInit {
-
+export class StaffSchedulComponent implements OnInit {
   constructor(
     private router: Router,
     private http: Http,
   ) { }
 
-
-  cleanSchedul: Observable<any[]>;
+  clean: Observable<any[]>;
   field: any = {};
   urlNow: string;
   paramID: string;
   displaySave: boolean;
   isReadOnly: boolean;
   edited: boolean;
-  listClean: any = [];
 
   ngOnInit() {
-    this.doGetListClean();
-    var url = "http://localhost:8083/csg/cleanSchedulAll";
+    var url = "http://localhost:8083/csg/cleanAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
-      this.cleanSchedul = datas;
+      this.clean = datas;
     });
     this.displaySave = true;
     this.isReadOnly = true
     this.edited = false;
   }
 
-  doGetListClean() {
-    Helpers.setLoading(true);
-    var url = "http://localhost:8083/csg/cleanAll";
-    this.http.get(url).subscribe(res => {
-      var datas = res.json().datas;
-      this.listClean = datas;
-      Helpers.setLoading(false);
-    });
-  }
-
   doPostData() {
     let self = this;
     let url = "";
     self.paramID = self.field.id;
-
+    
     if (self.paramID === undefined) {
-      url = "http://localhost:8083/csg/cleanSchedulSave";
+      url = "http://localhost:8083/csg/cleanSave";
     } else {
-      url = "http://localhost:8083/csg/cleanSchedulUpdate/" + self.paramID;
+      url = "http://localhost:8083/csg/cleanUpdate/" + self.paramID;
     }
 
-    if (!self.field.days) {
-      self.alertDialogPost("Days");
-    } else if (!self.field.kodeClean) {
+    if (!self.field.posisi) {
+      self.alertDialogPost("Position");
+    } else if (!self.field.cleanLocation) {
+      self.alertDialogPost("Clean Location");
+    } else if (!self.field.cleanType) {
       self.alertDialogPost("Clean Type");
     } else {
       if (this.paramID === undefined) {
         Swal.fire({
           title: 'Information',
-          text: 'Are you sure to insert this clean schedul?',
+          text: 'Are you sure to insert this data?',
           type: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Yes'
@@ -80,10 +67,10 @@ export class CleanSchedulComponent implements OnInit {
             location.reload();
           }
         });
-      } else {
+      } else{
         Swal.fire({
           title: 'Information',
-          text: 'Are you sure to update this clean schedul?',
+          text: 'Are you sure to update this data?',
           type: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Yes'
@@ -100,10 +87,10 @@ export class CleanSchedulComponent implements OnInit {
 
   doPostDataProcess(url) {
     var dataForm = {
-      "id": this.field.id,
-      "days": this.field.days,
-      "kodeClean": this.field.kodeClean,
-      "nik": this.field.nik
+      "kodeClean": this.field.id,
+      "posisi": this.field.posisi,
+      "cleaningLocation": this.field.cleanLocation,
+      "cleaningType": this.field.cleanType
     }
 
     this.http.post(url, dataForm).map(res =>
@@ -114,7 +101,7 @@ export class CleanSchedulComponent implements OnInit {
         this.alertDialogResult(result.message);
       } else {
         Helpers.setLoading(false);
-        this.router.navigate(['/clean-schedul']);
+        this.router.navigate(['/clean']);
         location.reload();
       }
 
@@ -134,17 +121,17 @@ export class CleanSchedulComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/cleanSchedulById/" + id;
+    var urlGetByID = "http://localhost:8083/csg/cleanById/" + id;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
       if (res.json().status == 100) {
         self.field = datas;
 
-        self.field.id = datas.id;
-        self.field.days = datas.days;
-        self.field.kodeClean = datas.kodeClean;
-        self.field.nik = datas.nik;
+        self.field.id = datas.kodeClean;
+        self.field.posisi = datas.posisi;
+        self.field.cleanLocation = datas.cleaningLocation;
+        self.field.cleanType = datas.cleaningType;
 
       } else if (res.json().status == 0) {
         Swal.fire({
@@ -164,10 +151,10 @@ export class CleanSchedulComponent implements OnInit {
 
   doDelete(id) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/cleanSchedulDelete/" + id;
+    var urldelete = "http://localhost:8083/csg/cleanDelete/" + id;
     Swal.fire({
       title: 'Information',
-      text: "Are you sure to delete this section?",
+      text: "Are you sure to delete this crew?",
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes'

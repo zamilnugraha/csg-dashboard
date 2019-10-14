@@ -1,3 +1,4 @@
+import { StaffSchedulComponent } from './../../staff-schedul/staff-schedul.component';
 import { ResultHourComponent } from './../../result-hour/result-hour.component';
 import { CrewComponent } from './../../crew/crew.component';
 import { Routes } from '@angular/router';
@@ -16,4 +17,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'clean', component: CleanComponent },
     { path: 'clean-section', component: CleanSectionComponent },
     { path: 'result-hour', component: ResultHourComponent },
+    { path: 'staff-schedul', component: StaffSchedulComponent },
 ];

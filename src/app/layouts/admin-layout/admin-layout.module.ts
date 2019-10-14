@@ -1,3 +1,4 @@
+import { StaffSchedulComponent } from './../../staff-schedul/staff-schedul.component';
 import { ResultHourComponent } from './../../result-hour/result-hour.component';
 import { CrewComponent } from './../../crew/crew.component';
 import { NgModule } from '@angular/core';
@@ -10,15 +11,9 @@ import { ProfileComponent } from '../../profile/profile.component';
 import { CleanSchedulComponent } from '../../clean-schedul/clean-schedul.component';
 import { CleanComponent } from '../../clean/clean.component';
 import { CleanSectionComponent } from '../../clean-section/clean-section.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatTooltipModule, MatSelectModule } from '@angular/material';
 
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatRippleModule,
-  MatFormFieldModule,
-  MatTooltipModule,
-  MatSelectModule
-} from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +25,9 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
   declarations: [
     DashboardComponent,
@@ -40,6 +37,7 @@ import {
     CleanComponent,
     CleanSectionComponent,
     ResultHourComponent,
+    StaffSchedulComponent
   ]
 })
 

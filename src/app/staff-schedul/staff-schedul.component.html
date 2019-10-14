@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Clean Schedul</h4>
+                        <h4 class="card-title">Add Staff Schedul</h4>
                         <p class="card-category">Complete your profile</p>
                     </div>
                     <div class="card-body">
@@ -18,30 +18,42 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <label for="inputState">Days</label>
-                                        <mat-select id="inputState" class="form-control" name="days"
-                                            [(ngModel)]="field.days" #days="ngModel">
-                                            <mat-option value="Sunday">Sunday</mat-option>
-                                            <mat-option value="Monday">Monday</mat-option>
-                                            <mat-option value="Tuesday">Tuesday</mat-option>
-                                            <mat-option value="Wednesday">Wednesday</mat-option>
-                                            <mat-option value="Thursday">Thursday</mat-option>
-                                            <mat-option value="Friday">Friday</mat-option>
-                                            <mat-option value="Saturday">Saturday</mat-option>
-                                        </mat-select>
+                                        <input matInput placeholder="Posisi" type="text" name="posisi"
+                                            [(ngModel)]="field.posisi" #posisi="ngModel">
+                                        <div *ngIf="posisi.invalid && (posisi.dirty || posisi.touched)"
+                                            class="has-danger">
+                                            <div class="form-control-feedback" *ngIf="posisi.errors.required">
+                                                Posisi is required.
+                                            </div>
+                                        </div>
                                     </mat-form-field>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <label for="inputState">Clean Type</label>
-                                        <mat-select id="inputState" class="form-control" name="kodeClean"
-                                            [(ngModel)]="field.kodeClean" #kodeClean="ngModel">
-                                            <mat-option *ngFor="let obj of listClean" [value]="obj.kodeClean">
-                                                {{obj.posisi}}
-                                            </mat-option>
-                                        </mat-select>
+                                        <input matInput placeholder="Clean Location" type="text" name="cleanLocation"
+                                            [(ngModel)]="field.cleanLocation" #cleanLocation="ngModel">
+                                        <div *ngIf="cleanLocation.invalid && (cleanLocation.dirty || cleanLocation.touched)"
+                                            class="has-danger">
+                                            <div class="form-control-feedback" *ngIf="cleanLocation.errors.required">
+                                                Clean Location is required.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Clean Type" type="text" name="cleanType"
+                                            [(ngModel)]="field.cleanType" #cleanType="ngModel">
+                                        <div *ngIf="cleanType.invalid && (cleanType.dirty || cleanType.touched)"
+                                            class="has-danger">
+                                            <div class="form-control-feedback" *ngIf="cleanType.errors.required">
+                                                Clean Type is required.
+                                            </div>
+                                        </div>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -65,25 +77,27 @@
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
                             <thead class="text-danger">
-                                <th>Days</th>
-                                <th>Kode Clean</th>
+                                <th>Posisi</th>
+                                <th>Clean Location</th>
+                                <th>Clean Type</th>
                                 <th class="td-actions">Action</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cleans of cleanSchedul">
-                                    <td>{{cleans.days}}</td>
-                                    <td>{{cleans.kodeClean}}</td>
+                                <tr *ngFor="let cleans of clean">
+                                    <td>{{cleans.posisi}}</td>
+                                    <td>{{cleans.cleaningLocation}}</td>
+                                    <td>{{cleans.cleaningType}}</td>
                                     <td class="td-actions">
                                         <button mat-raised-button type="button" matTooltip="Edit Task"
                                             [matTooltipPosition]="'above'"
                                             class="btn btn-primary btn-link btn-sm btn-just-icon"
-                                            (click)="doGetDataByID(cleans.id)">
+                                            (click)="doGetDataByID(cleans.kodeClean)">
                                             <i class="material-icons">edit</i>
                                         </button>
                                         <button mat-raised-button type="button" matTooltip="Remove"
                                             [matTooltipPosition]="'above'"
                                             class="btn btn-danger btn-link btn-sm btn-just-icon"
-                                            (click)="doDelete(cleans.id)">
+                                            (click)="doDelete(cleans.kodeClean)">
                                             <i class="material-icons">close</i>
                                         </button>
                                     </td>
@@ -93,6 +107,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

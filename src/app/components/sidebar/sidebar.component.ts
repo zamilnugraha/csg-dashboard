@@ -15,6 +15,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/clean-section', title: 'Section',  icon:'library_books', class: '' },
     { path: '/clean-schedul', title: 'Clean Schedul',  icon:'assignment', class: '' },
     { path: '/result-hour', title: 'Result By Hour',  icon:'menu_book', class: '' },
+    { path: '/staff-schedul', title: 'Staff Schedul',  icon:'date_range', class: '' },
 ];
 
 @Component({
