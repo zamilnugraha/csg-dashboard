@@ -109,6 +109,7 @@ export class ProfileComponent implements OnInit {
         if (result.value) {
           Helpers.setLoading(true);
           self.doPostDataProcess(url);
+          window.location.reload();
         }
       });
     }
