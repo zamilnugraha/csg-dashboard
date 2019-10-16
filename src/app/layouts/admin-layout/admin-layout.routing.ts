@@ -1,3 +1,4 @@
+import { TargetStoreComponent } from './../../target-store/target-store.component';
 import { StaffSchedulComponent } from './../../staff-schedul/staff-schedul.component';
 import { ResultHourComponent } from './../../result-hour/result-hour.component';
 import { CrewComponent } from './../../crew/crew.component';
@@ -18,4 +19,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'clean-section', component: CleanSectionComponent },
     { path: 'result-hour', component: ResultHourComponent },
     { path: 'staff-schedul', component: StaffSchedulComponent },
+    { path: 'target-store', component: TargetStoreComponent },
 ];

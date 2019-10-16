@@ -1,3 +1,4 @@
+import { TargetStoreComponent } from './../../target-store/target-store.component';
 import { StaffSchedulComponent } from './../../staff-schedul/staff-schedul.component';
 import { ResultHourComponent } from './../../result-hour/result-hour.component';
 import { CrewComponent } from './../../crew/crew.component';
@@ -37,7 +38,8 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, M
     CleanComponent,
     CleanSectionComponent,
     ResultHourComponent,
-    StaffSchedulComponent
+    StaffSchedulComponent,
+    TargetStoreComponent
   ]
 })
 
