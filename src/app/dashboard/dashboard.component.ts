@@ -16,13 +16,18 @@ export class DashboardComponent implements OnInit {
   ) { }
   
   cleanTask: Observable<any[]>;
+  cleanTampung: any;
   currentDate = new Date();
+  dataTampung :String;
 
   ngOnInit() {
+    let self = this;
     var url = "http://localhost:8083/csg/staff";
-    this.http.get(url).subscribe(res => {
+    self.http.get(url).subscribe(res => {
       var datas = res.json().datas;
-      this.cleanTask = datas;
+      self.cleanTask = datas;
+      
+      console.log(self.cleanTask);
     });
   }
 
