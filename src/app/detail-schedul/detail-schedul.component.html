@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Detail Schedul Crew</h4>
+                        <button mat-raised-button type="button" class="btn btn-primary pull-left"
+                            (click)="doDetailSchedul()">Back</button>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover" border="1" align="center">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Nama Crew</th>
+                                    <th colspan="2">Sunday</th>
+                                    <th colspan="2">Monday</th>
+                                    <th colspan="2">Tuesday</th>
+                                    <th colspan="2">Wednesday</th>
+                                    <th colspan="2">Thursday</th>
+                                    <th colspan="2">Friday</th>
+                                    <th colspan="2">Saturday</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let obj of cleanTask; let i = index">
+                                    <td width="300px">
+                                        <span>{{obj.nama}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Sunday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Sunday'">{{obj.endDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Monday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Monday'">{{obj.endDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Tuesday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Tuesday'">{{obj.endDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Wednesday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Wednesday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Thursday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Thursday'">{{obj.endDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Friday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Friday'">{{obj.endDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Saturday'">{{obj.startDate}}</span>
+                                    </td>
+                                    <td width="100px">
+                                        <span *ngIf="obj.dateWork =='Saturday'">{{obj.endDate}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Add Target Store</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="doPostData()" #addForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Target Sales" type="text" name="targetSales"
+                                            [(ngModel)]="field.targetSales" #targetSales="ngModel"
+                                            (keypress)="numberOnly($event)">
+                                        <div *ngIf="targetSales.invalid && (targetSales.dirty || targetSales.touched)"
+                                            class="has-danger">
+                                            <div class="form-control-feedback" *ngIf="targetSales.errors.required">
+                                                Target Sales is required.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Target Transaksi" type="text"
+                                            name="targetTransaksi" [(ngModel)]="field.targetTransaksi"
+                                            #targetTransaksi="ngModel" (keypress)="numberOnly($event)">
+                                        <div *ngIf="targetTransaksi.invalid && (targetTransaksi.dirty || targetTransaksi.touched)"
+                                            class="has-danger">
+                                            <div class="form-control-feedback" *ngIf="targetTransaksi.errors.required">
+                                                Target Transaksi is required.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="inputState">Type Store</label>
+                                        <mat-select id="inputState" class="form-control" name="typeStore"
+                                            [(ngModel)]="field.typeStore" #typeStore="ngModel">
+                                            <mat-option value="MS">Mother Store</mat-option>
+                                            <mat-option value="HD">Home Delivery</mat-option>
+                                            <mat-option value="DRT">Drive True</mat-option>
+                                            <mat-option value="CSP">Coffee Shop</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-success pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

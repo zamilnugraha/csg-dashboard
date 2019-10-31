@@ -1,3 +1,5 @@
+import { DetailScheduldComponent } from './../../detail-schedul/detail-schedul.component';
+import { DetailTargetStoreComponent } from './../../detail-target-store/detail-target-store.component';
 import { TargetStoreComponent } from './../../target-store/target-store.component';
 import { StaffSchedulComponent } from './../../staff-schedul/staff-schedul.component';
 import { ResultHourComponent } from './../../result-hour/result-hour.component';
@@ -14,6 +16,8 @@ import { CleanComponent } from '../../clean/clean.component';
 import { CleanSectionComponent } from '../../clean-section/clean-section.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatTooltipModule, MatSelectModule } from '@angular/material';
+import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
+
 
 @NgModule({
   imports: [
@@ -28,7 +32,8 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, M
     MatSelectModule,
     MatTooltipModule,
     OwlDateTimeModule, 
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    OwlMomentDateTimeModule
   ],
   declarations: [
     DashboardComponent,
@@ -39,7 +44,9 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, M
     CleanSectionComponent,
     ResultHourComponent,
     StaffSchedulComponent,
-    TargetStoreComponent
+    TargetStoreComponent,
+    DetailTargetStoreComponent,
+    DetailScheduldComponent
   ]
 })
 

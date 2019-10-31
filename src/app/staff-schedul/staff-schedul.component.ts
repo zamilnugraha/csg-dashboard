@@ -72,8 +72,8 @@ export class StaffSchedulComponent implements OnInit {
       self.alertDialogPost("Start Time");
     } else if (!self.field.endTime) {
       self.alertDialogPost("End Time");
-    } else if (!self.field.workDate) {
-      self.alertDialogPost("Work Date");
+    } else if (!self.field.days) {
+      self.alertDialogPost("Days");
     } else {
       if (this.paramID === undefined) {
         Swal.fire({
@@ -113,7 +113,7 @@ export class StaffSchedulComponent implements OnInit {
       "crewId": this.field.nik,
       "startDate": this.field.startTime,
       "endDate": this.field.endTime,
-      "dateWork": this.field.workDate
+      "dateWork": this.field.days
     }
 
     this.http.post(url, dataForm).map(res =>
@@ -155,7 +155,7 @@ export class StaffSchedulComponent implements OnInit {
         self.field.nik = datas.crewId;
         self.field.startTime = datas.startDate;
         self.field.endTime = datas.endDate;
-        self.field.workDate = new Date(datas.dateWork);
+        self.field.days = datas.dateWork;
 
       } else if (res.json().status == 0) {
         Swal.fire({
@@ -239,5 +239,10 @@ export class StaffSchedulComponent implements OnInit {
   doCancel() {
     location.reload();
   }
+
+   doDetailSchedul() {
+    this.router.navigate(['/detail-schedul']);
+  }
+
 
 }
