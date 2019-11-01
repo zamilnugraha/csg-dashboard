@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-staff-schedul',
@@ -24,9 +25,10 @@ export class StaffSchedulComponent implements OnInit {
   isReadOnly: boolean;
   edited: boolean;
   listCrew: any = [];
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
-    var url = "http://localhost:8083/csg/staffAll";
+    var url = this.URLWS + "/csg/staffAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.listStaffSchedul = datas;
@@ -39,7 +41,7 @@ export class StaffSchedulComponent implements OnInit {
 
   doGetListClean() {
     Helpers.setLoading(true);
-    var url = "http://localhost:8083/csg/crewAll";
+    var url = this.URLWS + "/csg/crewAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.listCrew = datas;
@@ -61,9 +63,9 @@ export class StaffSchedulComponent implements OnInit {
     self.paramID = self.field.id;
 
     if (self.paramID === undefined) {
-      url = "http://localhost:8083/csg/staffSave";
+      url = self.URLWS + "/csg/staffSave";
     } else {
-      url = "http://localhost:8083/csg/staffUpdate/" + self.paramID;
+      url = self.URLWS + "/csg/staffUpdate/" + self.paramID;
     }
 
     if (!self.field.nik) {
@@ -144,7 +146,7 @@ export class StaffSchedulComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/staffById/" + id;
+    var urlGetByID = self.URLWS + "/csg/staffById/" + id;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
@@ -175,7 +177,7 @@ export class StaffSchedulComponent implements OnInit {
 
   doDelete(id) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/staffDelete/" + id;
+    var urldelete = self.URLWS + "/csg/staffDelete/" + id;
     Swal.fire({
       title: 'Information',
       text: "Are you sure to delete this crew?",

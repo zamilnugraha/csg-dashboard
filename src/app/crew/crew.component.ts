@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 
 import Swal from 'sweetalert2'
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-crew',
@@ -23,9 +24,10 @@ export class CrewComponent implements OnInit {
   urlNow: string;
   displaySave: boolean;
   isReadOnly: boolean;
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
-    var url = "http://localhost:8083/csg/crewAll";
+    var url = this.URLWS + "/csg/crewAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.crews = datas;
@@ -48,9 +50,9 @@ export class CrewComponent implements OnInit {
     let url = "";
 
     if (self.displaySave) {
-      url = "http://localhost:8083/csg/crewSave";
+      url = self.URLWS + "/csg/crewSave";
     } else {
-      url = "http://localhost:8083/csg/crewUpdate/" + self.field.nik;
+      url = self.URLWS + "/csg/crewUpdate/" + self.field.nik;
     }
 
     if (!self.field.kodeStore) {
@@ -134,7 +136,7 @@ export class CrewComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/crewById/" + nik;
+    var urlGetByID = self.URLWS + "/csg/crewById/" + nik;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
@@ -165,7 +167,7 @@ export class CrewComponent implements OnInit {
 
   doDelete(nik) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/crewDelete/" + nik;
+    var urldelete = self.URLWS + "/csg/crewDelete/" + nik;
     Swal.fire({
       title: 'Information',
       text: "Are you sure to delete this crew?",

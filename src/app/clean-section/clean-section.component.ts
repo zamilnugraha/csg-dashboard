@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Helpers } from './../helpers';
@@ -24,9 +25,10 @@ export class CleanSectionComponent implements OnInit {
   displaySave: boolean;
   isReadOnly: boolean;
   edited: boolean;
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
-    var url = "http://localhost:8083/csg/sectionAll";
+    var url = this.URLWS + "/csg/sectionAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.section = datas;
@@ -42,9 +44,9 @@ export class CleanSectionComponent implements OnInit {
     self.paramID = self.field.id;
     
     if (self.paramID === undefined) {
-      url = "http://localhost:8083/csg/sectionSave";
+      url = self.URLWS + "/csg/sectionSave";
     } else {
-      url = "http://localhost:8083/csg/sectionUpdate/" + self.paramID;
+      url = self.URLWS + "/csg/sectionUpdate/" + self.paramID;
     }
 
     if (!self.field.sectionName) {
@@ -116,7 +118,7 @@ export class CleanSectionComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/sectionById/" + id;
+    var urlGetByID = self.URLWS + "/csg/sectionById/" + id;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
@@ -144,7 +146,7 @@ export class CleanSectionComponent implements OnInit {
 
   doDelete(id) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/sectionDelete/" + id;
+    var urldelete = self.URLWS + "/csg/sectionDelete/" + id;
     Swal.fire({
       title: 'Information',
       text: "Are you sure to delete this section?",

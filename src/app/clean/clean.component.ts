@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Helpers } from './../helpers';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
@@ -23,9 +24,10 @@ export class CleanComponent implements OnInit {
   displaySave: boolean;
   isReadOnly: boolean;
   edited: boolean;
+  URLWS: string = environment.apiEndpoint;
 
   ngOnInit() {
-    var url = "http://localhost:8083/csg/cleanAll";
+    var url = this.URLWS + "/csg/cleanAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.clean = datas;
@@ -41,9 +43,9 @@ export class CleanComponent implements OnInit {
     self.paramID = self.field.id;
     
     if (self.paramID === undefined) {
-      url = "http://localhost:8083/csg/cleanSave";
+      url = self.URLWS + "/csg/cleanSave";
     } else {
-      url = "http://localhost:8083/csg/cleanUpdate/" + self.paramID;
+      url = self.URLWS + "/csg/cleanUpdate/" + self.paramID;
     }
 
     if (!self.field.posisi) {
@@ -121,7 +123,7 @@ export class CleanComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/cleanById/" + id;
+    var urlGetByID = self.URLWS + "/csg/cleanById/" + id;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
@@ -151,7 +153,7 @@ export class CleanComponent implements OnInit {
 
   doDelete(id) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/cleanDelete/" + id;
+    var urldelete = self.URLWS + "/csg/cleanDelete/" + id;
     Swal.fire({
       title: 'Information',
       text: "Are you sure to delete this crew?",

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { Helpers } from './../helpers';
 import { Http } from '@angular/http';
@@ -27,10 +28,11 @@ export class CleanSchedulComponent implements OnInit {
   isReadOnly: boolean;
   edited: boolean;
   listClean: any = [];
+  URLWS: string = environment.apiEndpoint;
 
   ngOnInit() {
     this.doGetListClean();
-    var url = "http://localhost:8083/csg/cleanSchedulAll";
+    var url = this.URLWS + "/csg/cleanSchedulAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.cleanSchedul = datas;
@@ -42,7 +44,7 @@ export class CleanSchedulComponent implements OnInit {
 
   doGetListClean() {
     Helpers.setLoading(true);
-    var url = "http://localhost:8083/csg/cleanAll";
+    var url = this.URLWS + "/csg/cleanAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.listClean = datas;
@@ -56,9 +58,9 @@ export class CleanSchedulComponent implements OnInit {
     self.paramID = self.field.id;
 
     if (self.paramID === undefined) {
-      url = "http://localhost:8083/csg/cleanSchedulSave";
+      url = self.URLWS + "/csg/cleanSchedulSave";
     } else {
-      url = "http://localhost:8083/csg/cleanSchedulUpdate/" + self.paramID;
+      url = self.URLWS + "/csg/cleanSchedulUpdate/" + self.paramID;
     }
 
     if (!self.field.days) {
@@ -134,7 +136,7 @@ export class CleanSchedulComponent implements OnInit {
     } else {
       this.displaySave = true
     }
-    var urlGetByID = "http://localhost:8083/csg/cleanSchedulById/" + id;
+    var urlGetByID = self.URLWS + "/csg/cleanSchedulById/" + id;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
@@ -164,7 +166,7 @@ export class CleanSchedulComponent implements OnInit {
 
   doDelete(id) {
     let self = this;
-    var urldelete = "http://localhost:8083/csg/cleanSchedulDelete/" + id;
+    var urldelete = self.URLWS + "/csg/cleanSchedulDelete/" + id;
     Swal.fire({
       title: 'Information',
       text: "Are you sure to delete this section?",

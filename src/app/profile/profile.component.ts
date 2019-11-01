@@ -4,6 +4,7 @@ import { Helpers } from './../helpers';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   hasilEat:number;
   totalEat :any;
   totalHasilEat :any;
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
     this.doGetDataByID();
@@ -34,7 +36,7 @@ export class ProfileComponent implements OnInit {
   doGetDataByID() {
     let self = this;
 
-    var urlGetByID = "http://localhost:8083/csg/profileAll";
+    var urlGetByID = self.URLWS + "/csg/profileAll";
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
@@ -82,7 +84,7 @@ export class ProfileComponent implements OnInit {
     let self = this;
     let url = "";
 
-    url = "http://localhost:8083/csg/profileSave";
+    url = self.URLWS + "/csg/profileSave";
 
     if (!self.field.nameStore) {
       self.alertDialogPost("Store Name");

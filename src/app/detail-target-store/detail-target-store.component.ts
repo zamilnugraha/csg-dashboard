@@ -10,6 +10,7 @@ import { OwlDateTimeComponent, DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_
 import * as _moment from 'moment';
 import { Moment } from 'moment';
 import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
+import { environment } from 'environments/environment';
 
 const moment = (_moment as any).default ? (_moment as any).default : _moment;
 
@@ -63,6 +64,7 @@ export class DetailTargetStoreComponent implements OnInit {
   totalAllTrans = 0;
   totalTargetSales = 0;
   totalTragetTrans = 0;
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
   }
@@ -109,7 +111,7 @@ export class DetailTargetStoreComponent implements OnInit {
 
     console.log(self.dateInput)
 
-    var urlGetByID = "http://localhost:8083/csg/targetStore/" + self.dateInput + "/" + self.field.typeOrder;
+    var urlGetByID = self.URLWS + "/csg/targetStore/" + self.dateInput + "/" + self.field.typeOrder;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 

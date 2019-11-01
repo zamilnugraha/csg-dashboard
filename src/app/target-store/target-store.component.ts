@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-tager-store',
@@ -18,6 +19,7 @@ export class TargetStoreComponent implements OnInit {
 
   clean: Observable<any[]>;
   field: any = {};
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
   }

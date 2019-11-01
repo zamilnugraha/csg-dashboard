@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
@@ -20,10 +21,11 @@ export class DetailScheduldComponent implements OnInit {
   currentDate = new Date();
   dataTampung: any;
   nama:any;
+  URLWS: string = environment.apiEndpoint;
 
   ngOnInit() {
     let self = this;
-    var url = "http://localhost:8083/csg/detailStaff";
+    var url = self.URLWS + "/csg/detailStaff";
     self.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       self.cleanTask = datas;
@@ -36,7 +38,7 @@ export class DetailScheduldComponent implements OnInit {
   }
 
   getDataCrew() {
-    var url = "http://localhost:8083/csg/crewAll";
+    var url = this.URLWS + "/csg/crewAll";
     this.http.get(url).subscribe(res => {
       var datas = res.json().datas;
       this.dataTampung = datas;

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,6 +26,7 @@ export class ResultHourComponent implements OnInit {
   dataDate: any ={};
   datePeriod1: any = '';
   datePeriod2: any = '';
+  URLWS=environment.apiEndpoint;
 
   ngOnInit() {
 
@@ -38,7 +40,7 @@ export class ResultHourComponent implements OnInit {
     self.datePeriod1 = datePipe.transform(self.field.startDate, 'yyyyMMdd');
     self.datePeriod2 = datePipe.transform(self.field.endDate, 'yyyyMMdd');
 
-    var urlGetByID = "http://localhost:8083/csg/resultByHour/" + self.datePeriod1 + "/" + self.datePeriod2;
+    var urlGetByID = self.URLWS + "/csg/resultByHour/" + self.datePeriod1 + "/" + self.datePeriod2;
     self.http.get(urlGetByID).subscribe(res => {
       var datas = res.json().datas;
 
